@@ -1,0 +1,33 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: finance-db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: finance_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  server:
+    build: ./server
+    container_name: finance-server
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    working_dir: /app
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgres://user:pass@postgres:5432/finance_db
+      JWT_SECRET: supersecret
+    command: npx nodemon --legacy-watch src/main.ts
+    depends_on:
+      - postgres
+
+volumes:
+  pgdata:
