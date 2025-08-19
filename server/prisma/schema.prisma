@@ -1,0 +1,59 @@
+generator client {
+  provider      = "prisma-client-js"
+  output        = "../generated/prisma"
+  binaryTargets = ["native", "windows", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String        @id @default(uuid())
+  email        String        @unique
+  password     String
+  fullName     String
+  createdAt    DateTime      @default(now())
+  budgetPlans  BudgetPlan[]
+  categories   Category[]
+  transactions Transaction[]
+}
+
+model Category {
+  id           String        @id @default(uuid())
+  name         String
+  type         CategoryType
+  userId       String
+  budgetPlans  BudgetPlan[]
+  user         User          @relation(fields: [userId], references: [id])
+  transactions Transaction[]
+}
+
+model Transaction {
+  id          String   @id @default(uuid())
+  amount      Decimal
+  description String?
+  date        DateTime
+  createdAt   DateTime @default(now())
+  userId      String
+  categoryId  String
+  category    Category @relation(fields: [categoryId], references: [id])
+  user        User     @relation(fields: [userId], references: [id])
+}
+
+model BudgetPlan {
+  id         String   @id @default(uuid())
+  month      Int
+  year       Int
+  planned    Decimal
+  userId     String
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
+}
+
+enum CategoryType {
+  income
+  expense
+}
