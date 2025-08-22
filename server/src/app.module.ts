@@ -13,6 +13,7 @@ import { BalanceModule } from './user/balance.module';
     CategoriesModule,
     TransactionsModule,
     BalanceModule,
+    BalanceModule,
   ],
   controllers: [AppController],
   providers: [],

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useCurrency, symbols } from '../hooks/useCurrency.ts'
 
 type Transaction = {
     id: string
@@ -9,33 +10,58 @@ type Transaction = {
 
 export default function TransactionsPage() {
     const [transactions, setTransactions] = useState<Transaction[]>([])
+    const { currency, convert } = useCurrency()
 
+    // Получение транзакций с сортировкой по убыванию даты
     const fetchTransactions = async () => {
         const token = localStorage.getItem('token')
         if (!token) return
 
-        const res = await fetch('http://localhost:3000/transactions', {
-            headers: { Authorization: `Bearer ${token}` },
-        })
-        const data = await res.json()
-        setTransactions(data)
+        try {
+            const res = await fetch('http://localhost:3000/transactions', {
+                headers: { Authorization: `Bearer ${token}` },
+            })
+            const data: Transaction[] = await res.json()
+
+            // сортируем по дате: новые сверху
+            const sorted = data.sort(
+                (a, b) =>
+                    new Date(b.date).getTime() - new Date(a.date).getTime()
+            )
+            setTransactions(sorted)
+        } catch (err) {
+            console.error('Failed to fetch transactions', err)
+        }
     }
 
     useEffect(() => {
         fetchTransactions()
     }, [])
 
+    // Удаление транзакции
     const deleteTransaction = async (id: string) => {
         const token = localStorage.getItem('token')
         if (!token) return
 
-        await fetch(`http://localhost:3000/transactions/${id}`, {
-            method: 'DELETE',
-            headers: { Authorization: `Bearer ${token}` },
-        })
+        try {
+            const res = await fetch(
+                `http://localhost:3000/transactions/${id}`,
+                {
+                    method: 'DELETE',
+                    headers: { Authorization: `Bearer ${token}` },
+                }
+            )
+            if (!res.ok) throw new Error('Failed to delete transaction')
 
-        // Обновляем локальный список после удаления
-        setTransactions(transactions.filter((tx) => tx.id !== id))
+            setTransactions((prev) => prev.filter((tx) => tx.id !== id))
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
+    // Добавление транзакции без перезагрузки
+    const addTransaction = (transaction: Transaction) => {
+        setTransactions((prev) => [transaction, ...prev])
     }
 
     return (
@@ -52,54 +78,63 @@ export default function TransactionsPage() {
                         </tr>
                     </thead>
                     <tbody>
-                        {transactions.map((tx) => (
-                            <tr
-                                key={tx.id}
-                                className="border-t hover:bg-gray-50"
-                            >
-                                <td className="px-4 py-2">
-                                    {new Date(tx.date).toLocaleString('ru-RU', {
-                                        day: '2-digit',
-                                        month: '2-digit',
-                                        year: 'numeric',
-                                        hour: '2-digit',
-                                        minute: '2-digit',
-                                        second: '2-digit',
-                                    })}
-                                </td>
-                                <td className="px-4 py-2">
-                                    {tx.category?.name || 'Uncategorized'}
-                                </td>
-                                <td
-                                    className={`px-4 py-2 ${
-                                        tx.amount < 0
-                                            ? 'text-red-500'
-                                            : 'text-green-500'
-                                    }`}
+                        {transactions.map((tx) => {
+                            const date = new Date(tx.date)
+                            const formattedDate = `${date
+                                .getDate()
+                                .toString()
+                                .padStart(2, '0')}.${(date.getMonth() + 1)
+                                .toString()
+                                .padStart(2, '0')}.${date.getFullYear()} ${date
+                                .getHours()
+                                .toString()
+                                .padStart(2, '0')}:${date
+                                .getMinutes()
+                                .toString()
+                                .padStart(2, '0')}:${date
+                                .getSeconds()
+                                .toString()
+                                .padStart(2, '0')}`
+
+                            return (
+                                <tr
+                                    key={tx.id}
+                                    className="border-t hover:bg-gray-50"
                                 >
-                                    {tx.amount > 0 ? '+' : '-'} ₽
-                                    {Math.abs(tx.amount).toLocaleString()}
-                                </td>
-                                <td className="px-4 py-2">
-                                    <button
-                                        className="text-red-500 hover:underline"
-                                        onClick={() => deleteTransaction(tx.id)}
+                                    <td className="px-4 py-2">
+                                        {formattedDate}
+                                    </td>
+                                    <td className="px-4 py-2">
+                                        {tx.category?.name || 'Uncategorized'}
+                                    </td>
+                                    <td
+                                        className={`px-4 py-2 ${
+                                            tx.category?.type === 'expense'
+                                                ? 'text-red-500'
+                                                : 'text-green-500'
+                                        }`}
                                     >
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
-                        {transactions.length === 0 && (
-                            <tr>
-                                <td
-                                    colSpan={4}
-                                    className="text-gray-400 text-center py-4"
-                                >
-                                    No transactions yet
-                                </td>
-                            </tr>
-                        )}
+                                        {tx.category?.type === 'expense'
+                                            ? '-'
+                                            : '+'}
+                                        {convert(Math.abs(tx.amount)).toFixed(
+                                            2
+                                        )}
+                                        {symbols[currency]}
+                                    </td>
+                                    <td className="px-4 py-2">
+                                        <button
+                                            className="text-red-500 hover:underline"
+                                            onClick={() =>
+                                                deleteTransaction(tx.id)
+                                            }
+                                        >
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            )
+                        })}
                     </tbody>
                 </table>
             </div>

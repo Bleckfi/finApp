@@ -5,59 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="131d4b81-4353-4810-82bd-3eba3732b07d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/client/.prettierrc.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/api/api.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/api/decodeToken.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/BalanceCard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/Dashboard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/TransactionForm.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/constants.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/hooks/useCategories.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/hooks/useTransactions.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/pages/Auth.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/pages/BudgetPage.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/pages/Categories.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/pages/Profile.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/pages/TransactionsPage.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/types/types.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/utils/colors.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/prisma/schema.prisma" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/JwtStrategy.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/auth/auth.controller.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/auth/auth.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/auth/auth.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/category/categories.controller.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/category/categories.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/category/categories.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/prisma.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/prisma.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/transaction/transactions.controller.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/transaction/transactions.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/transaction/transactions.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/type/express.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/user/balance.controller.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/user/balance.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/user/balance.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/CurrencySelector.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/Diagram.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/hooks/useCurrency.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/store/currencySlice.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/store/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/budget/budget-plan.controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/budget/budget-plan.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/budget/budget-plan.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/BalanceCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BalanceCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Dashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/TransactionForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/TransactionForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/useTransactions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/useTransactions.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/vite-env.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/vite.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/.env" beforeDir="false" afterPath="$PROJECT_DIR$/server/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/eslint.config.mjs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/BudgetPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/BudgetPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/TransactionsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/TransactionsPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/utils/colors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/utils/colors.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/app.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/app.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/prisma/schema.prisma" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/test/app.e2e-spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/test/jest-e2e.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,8 +34,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -170,7 +137,9 @@
       <workItem from="1754902304967" duration="934000" />
       <workItem from="1754998974456" duration="6305000" />
       <workItem from="1755515281867" duration="5993000" />
-      <workItem from="1755605222154" duration="5597000" />
+      <workItem from="1755605222154" duration="5772000" />
+      <workItem from="1755669228257" duration="12818000" />
+      <workItem from="1755859750277" duration="3639000" />
     </task>
     <servers />
   </component>

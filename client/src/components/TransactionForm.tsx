@@ -3,12 +3,24 @@ import type { Transaction } from '../types/types.ts'
 
 export const TransactionForm = ({
     onSubmit,
+    selectedMonth,
 }: {
     onSubmit: (transaction: Transaction) => void
+    selectedMonth: number
 }) => {
     const [categories, setCategories] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
+
+    const now = new Date()
+    const transactionDate = new Date(
+        now.getFullYear(),
+        selectedMonth, // выбранный месяц
+        now.getDate(), // сегодняшний день
+        now.getHours(), // текущее время
+        now.getMinutes(),
+        now.getSeconds()
+    )
 
     useEffect(() => {
         async function fetchCategories() {
@@ -26,7 +38,7 @@ export const TransactionForm = ({
                         'Content-Type': 'application/json',
                     },
                 })
-                if (!res.ok) throw new Error('Failed to fetch categories')
+                if (!res.ok) new Error('Failed to fetch categories')
                 const data = await res.json()
                 setCategories(data)
             } catch (e: any) {
@@ -60,10 +72,10 @@ export const TransactionForm = ({
         if (!category) return
 
         onSubmit({
-            amount, // оставляем как есть
+            amount,
             type: category.type,
             categoryId: transaction.categoryId,
-            date: new Date(),
+            date: transactionDate, // дата с выбранным месяцем и текущим временем
             name: category.name,
         })
 
@@ -82,12 +94,12 @@ export const TransactionForm = ({
                 }
                 className="border border-gray-300 rounded px-3 py-2 shadow-sm"
             >
-                <option value="expense">Expense</option>
-                <option value="income">Income</option>
+                <option value="expense">Расход</option>
+                <option value="income">Приход</option>
             </select>
 
             {loading ? (
-                <p className="text-gray-500 px-3 py-2">Loading...</p>
+                <p className="text-gray-500 px-3 py-2">Загрузка...</p>
             ) : error ? (
                 <p className="text-red-500 px-3 py-2">{error}</p>
             ) : (
@@ -101,10 +113,10 @@ export const TransactionForm = ({
                     }
                     className="border border-gray-300 rounded px-3 py-2 shadow-sm"
                 >
-                    <option value="">Select category</option>
+                    <option value="">Выберите категорию</option>
                     {categories
-                        .filter((cat) => cat.type === transaction.type)
-                        .map((category) => (
+                        .filter((cat: any) => cat.type === transaction.type)
+                        .map((category: any) => (
                             <option key={category.id} value={category.id}>
                                 {category.name}
                             </option>
@@ -114,7 +126,7 @@ export const TransactionForm = ({
 
             <input
                 type="number"
-                placeholder="Amount"
+                placeholder="Сумма"
                 value={transaction.amount}
                 onChange={(e) =>
                     setTransaction((prev) => ({
@@ -129,7 +141,7 @@ export const TransactionForm = ({
                 type="submit"
                 className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
             >
-                Add
+                Добавить
             </button>
         </form>
     )

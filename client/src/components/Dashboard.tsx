@@ -1,78 +1,91 @@
+import React from 'react'
 import { BalanceCard } from './BalanceCard.tsx'
 import { useTransactions } from '../hooks/useTransactions.ts'
-import { useColors } from '../utils/colors.ts'
 import { TransactionForm } from './TransactionForm.tsx'
-import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts'
-import { useEffect, useState } from 'react'
-import type { ChartItem, Transaction } from '../types/types.ts'
+import type { Transaction } from '../types/types.ts'
+import Diagram from './Diagram.tsx'
+import { useCurrency, symbols } from '../hooks/useCurrency.ts'
 
 const months = [
-    { label: 'January', value: 0 },
-    { label: 'February', value: 1 },
-    { label: 'March', value: 2 },
-    { label: 'April', value: 3 },
-    { label: 'May', value: 4 },
-    { label: 'June', value: 5 },
-    { label: 'July', value: 6 },
-    { label: 'August', value: 7 },
-    { label: 'September', value: 8 },
-    { label: 'October', value: 9 },
-    { label: 'November', value: 10 },
-    { label: 'December', value: 11 },
+    { label: 'Январь', value: 0 },
+    { label: 'Февраль', value: 1 },
+    { label: 'Март', value: 2 },
+    { label: 'Апрель', value: 3 },
+    { label: 'Май', value: 4 },
+    { label: 'Июнь', value: 5 },
+    { label: 'Июль', value: 6 },
+    { label: 'Август', value: 7 },
+    { label: 'Сентябрь', value: 8 },
+    { label: 'Октябрь', value: 9 },
+    { label: 'Ноябрь', value: 10 },
+    { label: 'Декабрь', value: 11 },
 ]
 
 export default function Dashboard() {
     const { data, selectedMonth, setSelectedMonth, addTransaction } =
         useTransactions()
+    const { currency, setCurrency, convert } = useCurrency()
 
     const incomeData = data[selectedMonth]?.income || []
     const expenseData = data[selectedMonth]?.expense || []
 
-    const expenseColors = useColors(expenseData)
-    const incomeColors = useColors(incomeData)
+    const totalIncome = incomeData.reduce((sum, t) => sum + Number(t.amount), 0)
+    const totalExpense = expenseData.reduce(
+        (sum, t) => sum + Math.abs(Number(t.amount)),
+        0
+    )
 
-    // Диаграммы
-    const incomeChart: ChartItem[] = incomeData.map((t) => ({
-        name: t.name,
-        value: Math.abs(Number(t.amount)),
-    }))
+    // Мемоизация последних транзакций
+    const latestTransactions = React.useMemo(() => {
+        const incomeData = data[selectedMonth]?.income || []
+        const expenseData = data[selectedMonth]?.expense || []
 
-    // Расходы остаются отрицательными, но диаграмма показывает положительные
-    const expenseChart: ChartItem[] = expenseData.map((t) => ({
-        name: t.name,
-        value: Math.abs(Number(t.amount)),
-    }))
-
-    // Последние транзакции: объединяем доход и расход, сортируем по дате
-    const latestTransactions = [...incomeData, ...expenseData]
-        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-        .slice(0, 5)
+        return [...incomeData, ...expenseData]
+            .sort(
+                (a, b) =>
+                    new Date(b.date).getTime() - new Date(a.date).getTime()
+            )
+            .slice(0, 5)
+            .map((t) => ({
+                ...t,
+                convertedAmount: convert(Math.abs(Number(t.amount))),
+            }))
+    }, [data, selectedMonth, convert])
 
     const handleAddTransaction = (transaction: Transaction) => {
         addTransaction(transaction)
     }
 
-    const totalIncome = incomeData.reduce((sum, t) => sum + Number(t.amount), 0)
-    const totalExpense = expenseData.reduce(
-        (sum, t) => sum + Math.abs(Number(t.amount)), // обязательно берём модуль
-        0
-    )
     return (
         <div className="p-6 space-y-6">
-            <h1 className="text-2xl font-bold">Dashboard</h1>
+            <div className="flex justify-between items-center">
+                <h1 className="text-2xl font-bold">Dashboard</h1>
+                <select
+                    value={currency}
+                    onChange={(e) => setCurrency(e.target.value as any)}
+                    className="border border-gray-300 rounded px-3 py-2 shadow-sm"
+                >
+                    <option value="BYN">BYN</option>
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="RUB">RUB</option>
+                </select>
+            </div>
 
-            {/* Баланс */}
             <BalanceCard
                 income={totalIncome}
-                expense={totalExpense} // теперь положительное число
+                expense={totalExpense}
                 month={selectedMonth}
                 year={new Date().getFullYear()}
+                currencySymbol={symbols[currency]}
+                convert={convert}
             />
 
-            {/* Форма и выбор месяца */}
             <div className="flex justify-between mb-4 flex-col md:flex-row gap-4">
-                <TransactionForm onSubmit={handleAddTransaction} />
-
+                <TransactionForm
+                    onSubmit={handleAddTransaction}
+                    selectedMonth={selectedMonth}
+                />
                 <select
                     value={selectedMonth}
                     onChange={(e) => setSelectedMonth(Number(e.target.value))}
@@ -86,91 +99,59 @@ export default function Dashboard() {
                 </select>
             </div>
 
-            {/* Диаграммы */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Expenses */}
-                <div className="bg-white rounded-2xl shadow p-4 h-[300px]">
-                    <h3 className="text-lg font-semibold mb-2">Expenses</h3>
-                    <ResponsiveContainer width="100%" height="100%">
-                        <PieChart>
-                            <Pie
-                                data={expenseChart}
-                                dataKey="value"
-                                nameKey="name"
-                                cx="50%"
-                                cy="50%"
-                                outerRadius={80}
-                                label
-                            >
-                                {expenseChart.map((entry, index) => (
-                                    <Cell
-                                        key={`cell-expense-${index}`}
-                                        fill={expenseColors[index]}
-                                    />
-                                ))}
-                            </Pie>
-                            <Tooltip />
-                        </PieChart>
-                    </ResponsiveContainer>
-                </div>
+            <Diagram
+                incomeData={incomeData.map((t) => ({
+                    ...t,
+                    amount: convert(Number(t.amount)),
+                }))}
+                expenseData={expenseData.map((t) => ({
+                    ...t,
+                    amount: convert(Math.abs(Number(t.amount))),
+                }))}
+                currencySymbol={symbols[currency]}
+            />
 
-                {/* Income */}
-                <div className="bg-white rounded-2xl shadow p-4 h-[300px]">
-                    <h3 className="text-lg font-semibold mb-2">Income</h3>
-                    <ResponsiveContainer width="100%" height="100%">
-                        <PieChart>
-                            <Pie
-                                data={incomeChart}
-                                dataKey="value"
-                                nameKey="name"
-                                cx="50%"
-                                cy="50%"
-                                outerRadius={80}
-                                label
-                            >
-                                {incomeChart.map((entry, index) => (
-                                    <Cell
-                                        key={`cell-income-${index}`}
-                                        fill={incomeColors[index]}
-                                    />
-                                ))}
-                            </Pie>
-                            <Tooltip />
-                        </PieChart>
-                    </ResponsiveContainer>
-                </div>
-            </div>
-
-            {/* Последние транзакции */}
             <div className="bg-white rounded-2xl shadow p-4">
                 <h3 className="text-lg font-semibold mb-4">
                     Latest Transactions
                 </h3>
                 <ul className="space-y-3">
-                    {latestTransactions.map((t) => (
-                        <li
-                            key={t.id}
-                            className="flex justify-between items-center"
-                        >
-                            <div className="flex flex-col">
-                                <span>{t.name || 'Uncategorized'}</span>
-                                <span className="text-gray-400 text-sm">
-                                    {new Date(t.date).toLocaleDateString()}
-                                </span>
-                            </div>
-                            <span
-                                className={
-                                    t.type === 'income'
-                                        ? 'text-green-500'
-                                        : 'text-red-500'
-                                }
-                            >
-                                {t.type === 'income' ? '+' : '-'} ₽
-                                {Math.abs(Number(t.amount)).toLocaleString()}
-                            </span>
-                        </li>
-                    ))}
-                    {latestTransactions.length === 0 && (
+                    {latestTransactions.length > 0 ? (
+                        latestTransactions.map((t) => {
+                            const isIncome = t.category?.type === 'income'
+
+                            return (
+                                <li
+                                    key={t.id}
+                                    className="flex justify-between items-center"
+                                >
+                                    <div className="flex flex-col">
+                                        <span>
+                                            {t.category?.name ||
+                                                t.name ||
+                                                'Uncategorized'}
+                                        </span>
+                                        <span className="text-gray-400 text-sm">
+                                            {new Date(
+                                                t.date
+                                            ).toLocaleDateString()}
+                                        </span>
+                                    </div>
+                                    <span
+                                        className={
+                                            isIncome
+                                                ? 'text-green-500'
+                                                : 'text-red-500'
+                                        }
+                                    >
+                                        {isIncome ? '+' : '-'}
+                                        {symbols[currency]}
+                                        {t.convertedAmount.toFixed(2)}
+                                    </span>
+                                </li>
+                            )
+                        })
+                    ) : (
                         <li className="text-gray-400">No transactions yet</li>
                     )}
                 </ul>
