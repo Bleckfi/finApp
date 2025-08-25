@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BalanceCard } from './BalanceCard.tsx'
 import { useTransactions } from '../hooks/useTransactions.ts'
 import { TransactionForm } from './TransactionForm.tsx'
@@ -25,6 +25,15 @@ export default function Dashboard() {
     const { data, selectedMonth, setSelectedMonth, addTransaction } =
         useTransactions()
     const { currency, setCurrency, convert } = useCurrency()
+    const [latestCategories, setLatestCategories] = useState<
+        {
+            id: string
+            name: string
+            date: string
+            amount: number
+            type?: string
+        }[]
+    >([])
 
     const incomeData = data[selectedMonth]?.income || []
     const expenseData = data[selectedMonth]?.expense || []
@@ -35,22 +44,26 @@ export default function Dashboard() {
         0
     )
 
-    // Мемоизация последних транзакций
-    const latestTransactions = React.useMemo(() => {
+    React.useEffect(() => {
         const incomeData = data[selectedMonth]?.income || []
         const expenseData = data[selectedMonth]?.expense || []
 
-        return [...incomeData, ...expenseData]
+        const latest = [...incomeData, ...expenseData]
             .sort(
                 (a, b) =>
                     new Date(b.date).getTime() - new Date(a.date).getTime()
             )
             .slice(0, 5)
             .map((t) => ({
-                ...t,
-                convertedAmount: convert(Math.abs(Number(t.amount))),
+                id: t.id,
+                name: t.category?.name || t.name || 'Uncategorized',
+                date: t.date,
+                amount: t.amount,
+                type: t.category?.type,
             }))
-    }, [data, selectedMonth, convert])
+
+        setLatestCategories(latest)
+    }, [data, selectedMonth])
 
     const handleAddTransaction = (transaction: Transaction) => {
         addTransaction(transaction)
@@ -59,7 +72,7 @@ export default function Dashboard() {
     return (
         <div className="p-6 space-y-6">
             <div className="flex justify-between items-center">
-                <h1 className="text-2xl font-bold">Dashboard</h1>
+                <h1 className="text-2xl font-bold">Главная</h1>
                 <select
                     value={currency}
                     onChange={(e) => setCurrency(e.target.value as any)}
@@ -102,57 +115,48 @@ export default function Dashboard() {
             <Diagram
                 incomeData={incomeData.map((t) => ({
                     ...t,
-                    amount: convert(Number(t.amount)),
+                    amount: Number(t.amount),
                 }))}
                 expenseData={expenseData.map((t) => ({
                     ...t,
-                    amount: convert(Math.abs(Number(t.amount))),
+                    amount: Math.abs(Number(t.amount)),
                 }))}
                 currencySymbol={symbols[currency]}
             />
-
             <div className="bg-white rounded-2xl shadow p-4">
                 <h3 className="text-lg font-semibold mb-4">
-                    Latest Transactions
+                    Последние транзакции
                 </h3>
                 <ul className="space-y-3">
-                    {latestTransactions.length > 0 ? (
-                        latestTransactions.map((t) => {
-                            const isIncome = t.category?.type === 'income'
-
-                            return (
-                                <li
-                                    key={t.id}
-                                    className="flex justify-between items-center"
-                                >
-                                    <div className="flex flex-col">
-                                        <span>
-                                            {t.category?.name ||
-                                                t.name ||
-                                                'Uncategorized'}
-                                        </span>
-                                        <span className="text-gray-400 text-sm">
-                                            {new Date(
-                                                t.date
-                                            ).toLocaleDateString()}
-                                        </span>
-                                    </div>
-                                    <span
-                                        className={
-                                            isIncome
-                                                ? 'text-green-500'
-                                                : 'text-red-500'
-                                        }
-                                    >
-                                        {isIncome ? '+' : '-'}
-                                        {symbols[currency]}
-                                        {t.convertedAmount.toFixed(2)}
+                    {latestCategories.length > 0 ? (
+                        latestCategories.map((t) => (
+                            <li
+                                key={t.id}
+                                className="flex justify-between items-center"
+                            >
+                                <div className="flex flex-col">
+                                    <span>{t.name}</span>
+                                    <span className="text-gray-400 text-sm">
+                                        {new Date(t.date).toLocaleDateString()}
                                     </span>
-                                </li>
-                            )
-                        })
+                                </div>
+                                <span
+                                    className={
+                                        t.type === 'income'
+                                            ? 'text-green-500'
+                                            : 'text-red-500'
+                                    }
+                                >
+                                    {t.type === 'income' ? '+' : '-'}
+                                    {symbols[currency]}
+                                    {convert(
+                                        Math.abs(Number(t.amount))
+                                    ).toFixed(2)}
+                                </span>
+                            </li>
+                        ))
                     ) : (
-                        <li className="text-gray-400">No transactions yet</li>
+                        <li className="text-gray-400">Нет транзакций</li>
                     )}
                 </ul>
             </div>

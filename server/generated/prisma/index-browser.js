@@ -147,11 +147,12 @@ exports.Prisma.TransactionScalarFieldEnum = {
 
 exports.Prisma.BudgetPlanScalarFieldEnum = {
   id: 'id',
-  month: 'month',
-  year: 'year',
-  planned: 'planned',
   userId: 'userId',
-  categoryId: 'categoryId'
+  name: 'name',
+  target: 'target',
+  current: 'current',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SortOrder = {

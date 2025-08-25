@@ -20,7 +20,14 @@ export class AuthService {
       data: { email, password: hash, fullName },
     });
 
-    return { message: 'User created successfully', userId: user.id };
+    // Генерируем токен
+    const token = this.jwt.sign({
+      sub: user.id,
+      email: user.email,
+      fullName: user.fullName,
+    });
+
+    return { token };
   }
 
   async login(email: string, password: string) {

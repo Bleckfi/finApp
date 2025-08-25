@@ -104,45 +104,45 @@ function Layout({
             <aside className="w-64 bg-white p-6 shadow hidden md:flex flex-col justify-between">
                 <nav className="space-y-4">
                     <div className="font-bold mb-6">
-                        Hello, {user?.userName}
+                        Привет, {user?.userName}!
                     </div>
                     <Link
                         to="/"
                         className="block font-medium hover:text-blue-600"
                     >
-                        Dashboard
+                        Главная
                     </Link>
                     <Link
                         to="/transactions"
                         className="block font-medium hover:text-blue-600"
                     >
-                        Transactions
+                        Транзакции
                     </Link>
                     <Link
                         to="/budget"
                         className="block font-medium hover:text-blue-600"
                     >
-                        Budget
+                        Бюджет
                     </Link>
                     <Link
                         to="/categories"
                         className="block font-medium hover:text-blue-600"
                     >
-                        Categories
+                        Категории
                     </Link>
                     <Link
                         to="/profile"
                         className="block font-medium hover:text-blue-600"
                     >
-                        Profile
+                        Профиль
                     </Link>
                 </nav>
                 <button
                     onClick={onLogout}
-                    className="flex items-center justify-center gap-2 w-full bg-red-500 text-white px-4 py-2 rounded-xl shadow-md hover:bg-red-600 hover:shadow-lg transition-all duration-200"
+                    className="flex items-center justify-center gap-2 w-full bg-red-500 text-white px-4 py-2 rounded-xl shadow-md hover:bg-red-600 hover:shadow-lg transition-all duration-200 cursor-pointer"
                 >
                     <LogOut size={18} />
-                    <span>Logout</span>
+                    <span>Выйти</span>
                 </button>
             </aside>
             <main className="flex-1 p-6">{children}</main>

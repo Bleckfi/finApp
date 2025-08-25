@@ -9,16 +9,20 @@ type DiagramProps = {
 }
 
 export default function Diagram({ incomeData, expenseData }: DiagramProps) {
-    const { currency, convert } = useCurrency() // хук валюты
+    const { currency, convert } = useCurrency()
 
     function groupByCategory(transactions: Transaction[]): ChartItem[] {
         const map: Record<string, number> = {}
         transactions.forEach((t) => {
             const name = t.category?.name || 'Uncategorized'
             const amount = Math.abs(Number(t.amount))
-            map[name] = (map[name] || 0) + convert(amount) // конвертация
+            map[name] = (map[name] || 0) + amount // суммируем в исходной валюте
         })
-        return Object.entries(map).map(([name, value]) => ({ name, value }))
+        // конвертируем только в конце
+        return Object.entries(map).map(([name, value]) => ({
+            name,
+            value: convert(value),
+        }))
     }
 
     const incomeChart: ChartItem[] = groupByCategory(incomeData)

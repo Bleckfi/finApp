@@ -1,28 +1,39 @@
-import { Controller, Get, Post, Put, Delete, Body, Param, Req } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Delete,
+  Body,
+  Param,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import { BudgetPlanService } from './budget-plan.service';
-import { Prisma } from 'generated/prisma';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('budget-plan')
+@UseGuards(AuthGuard('jwt')) // <-- здесь используем JWT Guard
 export class BudgetPlanController {
-    constructor(private readonly service: BudgetPlanService) {}
+  constructor(private readonly service: BudgetPlanService) {}
 
-    @Get()
-    findAll(@Req() req) {
-        return this.service.findAll(req.user.id);
-    }
+  @Get()
+  findAll(@Req() req) {
+    return this.service.findAll(req.user.id); // req.user теперь доступен
+  }
 
-    @Post()
-    create(@Body() body: Prisma.BudgetPlanCreateInput) {
-        return this.service.create(body);
-    }
+  @Post()
+  create(@Req() req, @Body() body: { name: string; target: number }) {
+    return this.service.create({ ...body, userId: req.user.id });
+  }
 
-    @Put(':id')
-    update(@Param('id') id: string, @Body() body: Prisma.BudgetPlanUpdateInput) {
-        return this.service.update(id, body);
-    }
+  @Put(':id/add')
+  addAmount(@Param('id') id: string, @Body() body: { amount: number }) {
+    return this.service.addAmount(id, body.amount);
+  }
 
-    @Delete(':id')
-    delete(@Param('id') id: string) {
-        return this.service.delete(id);
-    }
+  @Delete(':id')
+  delete(@Param('id') id: string) {
+    return this.service.delete(id);
+  }
 }

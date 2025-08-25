@@ -88,12 +88,12 @@ export default function CategoriesPage() {
 
     return (
         <div className="max-w-3xl mx-auto p-6 bg-white rounded shadow">
-            <h2 className="text-2xl font-bold mb-4">Categories</h2>
+            <h2 className="text-2xl font-bold mb-4">Категории</h2>
 
             <div className="mb-6">
                 <input
                     type="text"
-                    placeholder="Category name"
+                    placeholder="Название"
                     className="border px-3 py-2 mr-2 rounded w-1/2"
                     value={newCategory.name}
                     onChange={(e) =>
@@ -111,15 +111,15 @@ export default function CategoriesPage() {
                         })
                     }
                 >
-                    <option value="income">Income</option>
-                    <option value="expense">Expense</option>
+                    <option value="income">Доход</option>
+                    <option value="expense">Расход</option>
                 </select>
 
                 <button
                     onClick={handleAdd}
                     className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
                 >
-                    Add
+                    Добавить
                 </button>
             </div>
 
@@ -139,7 +139,7 @@ export default function CategoriesPage() {
                             onClick={() => handleDelete(category.id)}
                             className="text-red-600 hover:underline"
                         >
-                            Delete
+                            Удалить
                         </button>
                     </li>
                 ))}

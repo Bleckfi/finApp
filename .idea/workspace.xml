@@ -5,26 +5,50 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="131d4b81-4353-4810-82bd-3eba3732b07d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/client/src/components/CurrencySelector.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/Diagram.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/hooks/useCurrency.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/store/currencySlice.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/store/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/budget/budget-plan.controller.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/budget/budget-plan.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/budget/budget-plan.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/BalanceCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/BalanceCard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Dashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Diagram.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Diagram.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/TransactionForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/TransactionForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/hooks/useTransactions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/useTransactions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/Auth.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Auth.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/pages/BudgetPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/BudgetPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/Categories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Categories.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Profile.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/pages/TransactionsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/TransactionsPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/utils/colors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/utils/colors.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/generated/prisma/client.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/generated/prisma/client.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/generated/prisma/default.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/generated/prisma/default.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/generated/prisma/edge.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/generated/prisma/edge.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/generated/prisma/index-browser.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/generated/prisma/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/generated/prisma/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/generated/prisma/libquery_engine-linux-musl-openssl-3.0.x.so.node" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/generated/prisma/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/generated/prisma/query_engine-windows.dll.node" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/generated/prisma/runtime/edge-esm.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/generated/prisma/runtime/edge.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/generated/prisma/runtime/index-browser.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/generated/prisma/runtime/index-browser.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/generated/prisma/runtime/library.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/generated/prisma/runtime/library.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/generated/prisma/runtime/react-native.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/generated/prisma/runtime/wasm-compiler-edge.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/generated/prisma/runtime/wasm-engine-edge.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/generated/prisma/schema.prisma" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/generated/prisma/wasm.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/generated/prisma/wasm.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/server/prisma/schema.prisma" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/auth/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/auth/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/budget/budget-plan.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/budget/budget-plan.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/budget/budget-plan.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/budget/budget-plan.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/budget/budget-plan.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/budget/budget-plan.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,7 +163,8 @@
       <workItem from="1755515281867" duration="5993000" />
       <workItem from="1755605222154" duration="5772000" />
       <workItem from="1755669228257" duration="12818000" />
-      <workItem from="1755859750277" duration="3639000" />
+      <workItem from="1755859750277" duration="3683000" />
+      <workItem from="1756102862445" duration="12115000" />
     </task>
     <servers />
   </component>

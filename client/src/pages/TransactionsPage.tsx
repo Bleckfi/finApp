@@ -23,7 +23,6 @@ export default function TransactionsPage() {
             })
             const data: Transaction[] = await res.json()
 
-            // сортируем по дате: новые сверху
             const sorted = data.sort(
                 (a, b) =>
                     new Date(b.date).getTime() - new Date(a.date).getTime()
@@ -59,22 +58,19 @@ export default function TransactionsPage() {
         }
     }
 
-    // Добавление транзакции без перезагрузки
-    const addTransaction = (transaction: Transaction) => {
-        setTransactions((prev) => [transaction, ...prev])
-    }
-
     return (
         <div className="p-6 space-y-6">
-            <h1 className="text-2xl font-bold">Transactions</h1>
+            <h1 className="text-2xl font-bold">Транзакции</h1>
             <div className="bg-white rounded-2xl shadow overflow-auto">
                 <table className="min-w-full text-sm">
                     <thead className="bg-gray-100 text-gray-600">
                         <tr>
-                            <th className="text-left px-4 py-2">Date & Time</th>
-                            <th className="text-left px-4 py-2">Category</th>
-                            <th className="text-left px-4 py-2">Amount</th>
-                            <th className="text-left px-4 py-2">Action</th>
+                            <th className="text-left px-4 py-2">
+                                Дата и время
+                            </th>
+                            <th className="text-left px-4 py-2">Категория</th>
+                            <th className="text-left px-4 py-2">Сумма</th>
+                            <th className="text-left px-4 py-2"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -129,7 +125,7 @@ export default function TransactionsPage() {
                                                 deleteTransaction(tx.id)
                                             }
                                         >
-                                            Delete
+                                            Удалить
                                         </button>
                                     </td>
                                 </tr>

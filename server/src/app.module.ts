@@ -5,6 +5,7 @@ import { PrismaModule } from './prisma.module';
 import { CategoriesModule } from './category/categories.module';
 import { TransactionsModule } from './transaction/transactions.module';
 import { BalanceModule } from './user/balance.module';
+import { BudgetPlanModule } from './budget/budget-plan.module';
 
 @Module({
   imports: [
@@ -13,7 +14,7 @@ import { BalanceModule } from './user/balance.module';
     CategoriesModule,
     TransactionsModule,
     BalanceModule,
-    BalanceModule,
+    BudgetPlanModule,
   ],
   controllers: [AppController],
   providers: [],

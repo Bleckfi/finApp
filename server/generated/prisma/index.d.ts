@@ -1221,12 +1221,10 @@ export namespace Prisma {
    */
 
   export type CategoryCountOutputType = {
-    budgetPlans: number
     transactions: number
   }
 
   export type CategoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    budgetPlans?: boolean | CategoryCountOutputTypeCountBudgetPlansArgs
     transactions?: boolean | CategoryCountOutputTypeCountTransactionsArgs
   }
 
@@ -1239,13 +1237,6 @@ export namespace Prisma {
      * Select specific fields to fetch from the CategoryCountOutputType
      */
     select?: CategoryCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * CategoryCountOutputType without action
-   */
-  export type CategoryCountOutputTypeCountBudgetPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: BudgetPlanWhereInput
   }
 
   /**
@@ -2542,7 +2533,6 @@ export namespace Prisma {
     name?: boolean
     type?: boolean
     userId?: boolean
-    budgetPlans?: boolean | Category$budgetPlansArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
     transactions?: boolean | Category$transactionsArgs<ExtArgs>
     _count?: boolean | CategoryCountOutputTypeDefaultArgs<ExtArgs>
@@ -2573,7 +2563,6 @@ export namespace Prisma {
 
   export type CategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "type" | "userId", ExtArgs["result"]["category"]>
   export type CategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    budgetPlans?: boolean | Category$budgetPlansArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
     transactions?: boolean | Category$transactionsArgs<ExtArgs>
     _count?: boolean | CategoryCountOutputTypeDefaultArgs<ExtArgs>
@@ -2588,7 +2577,6 @@ export namespace Prisma {
   export type $CategoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Category"
     objects: {
-      budgetPlans: Prisma.$BudgetPlanPayload<ExtArgs>[]
       user: Prisma.$UserPayload<ExtArgs>
       transactions: Prisma.$TransactionPayload<ExtArgs>[]
     }
@@ -2991,7 +2979,6 @@ export namespace Prisma {
    */
   export interface Prisma__CategoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    budgetPlans<T extends Category$budgetPlansArgs<ExtArgs> = {}>(args?: Subset<T, Category$budgetPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BudgetPlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     transactions<T extends Category$transactionsArgs<ExtArgs> = {}>(args?: Subset<T, Category$transactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -3420,30 +3407,6 @@ export namespace Prisma {
      * Limit how many Categories to delete.
      */
     limit?: number
-  }
-
-  /**
-   * Category.budgetPlans
-   */
-  export type Category$budgetPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BudgetPlan
-     */
-    select?: BudgetPlanSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BudgetPlan
-     */
-    omit?: BudgetPlanOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BudgetPlanInclude<ExtArgs> | null
-    where?: BudgetPlanWhereInput
-    orderBy?: BudgetPlanOrderByWithRelationInput | BudgetPlanOrderByWithRelationInput[]
-    cursor?: BudgetPlanWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: BudgetPlanScalarFieldEnum | BudgetPlanScalarFieldEnum[]
   }
 
   /**
@@ -4628,83 +4591,85 @@ export namespace Prisma {
   }
 
   export type BudgetPlanAvgAggregateOutputType = {
-    month: number | null
-    year: number | null
-    planned: Decimal | null
+    target: Decimal | null
+    current: Decimal | null
   }
 
   export type BudgetPlanSumAggregateOutputType = {
-    month: number | null
-    year: number | null
-    planned: Decimal | null
+    target: Decimal | null
+    current: Decimal | null
   }
 
   export type BudgetPlanMinAggregateOutputType = {
     id: string | null
-    month: number | null
-    year: number | null
-    planned: Decimal | null
     userId: string | null
-    categoryId: string | null
+    name: string | null
+    target: Decimal | null
+    current: Decimal | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type BudgetPlanMaxAggregateOutputType = {
     id: string | null
-    month: number | null
-    year: number | null
-    planned: Decimal | null
     userId: string | null
-    categoryId: string | null
+    name: string | null
+    target: Decimal | null
+    current: Decimal | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type BudgetPlanCountAggregateOutputType = {
     id: number
-    month: number
-    year: number
-    planned: number
     userId: number
-    categoryId: number
+    name: number
+    target: number
+    current: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
 
   export type BudgetPlanAvgAggregateInputType = {
-    month?: true
-    year?: true
-    planned?: true
+    target?: true
+    current?: true
   }
 
   export type BudgetPlanSumAggregateInputType = {
-    month?: true
-    year?: true
-    planned?: true
+    target?: true
+    current?: true
   }
 
   export type BudgetPlanMinAggregateInputType = {
     id?: true
-    month?: true
-    year?: true
-    planned?: true
     userId?: true
-    categoryId?: true
+    name?: true
+    target?: true
+    current?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type BudgetPlanMaxAggregateInputType = {
     id?: true
-    month?: true
-    year?: true
-    planned?: true
     userId?: true
-    categoryId?: true
+    name?: true
+    target?: true
+    current?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type BudgetPlanCountAggregateInputType = {
     id?: true
-    month?: true
-    year?: true
-    planned?: true
     userId?: true
-    categoryId?: true
+    name?: true
+    target?: true
+    current?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -4796,11 +4761,12 @@ export namespace Prisma {
 
   export type BudgetPlanGroupByOutputType = {
     id: string
-    month: number
-    year: number
-    planned: Decimal
     userId: string
-    categoryId: string
+    name: string
+    target: Decimal
+    current: Decimal
+    createdAt: Date
+    updatedAt: Date
     _count: BudgetPlanCountAggregateOutputType | null
     _avg: BudgetPlanAvgAggregateOutputType | null
     _sum: BudgetPlanSumAggregateOutputType | null
@@ -4824,73 +4790,71 @@ export namespace Prisma {
 
   export type BudgetPlanSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    month?: boolean
-    year?: boolean
-    planned?: boolean
     userId?: boolean
-    categoryId?: boolean
-    category?: boolean | CategoryDefaultArgs<ExtArgs>
+    name?: boolean
+    target?: boolean
+    current?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["budgetPlan"]>
 
   export type BudgetPlanSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    month?: boolean
-    year?: boolean
-    planned?: boolean
     userId?: boolean
-    categoryId?: boolean
-    category?: boolean | CategoryDefaultArgs<ExtArgs>
+    name?: boolean
+    target?: boolean
+    current?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["budgetPlan"]>
 
   export type BudgetPlanSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    month?: boolean
-    year?: boolean
-    planned?: boolean
     userId?: boolean
-    categoryId?: boolean
-    category?: boolean | CategoryDefaultArgs<ExtArgs>
+    name?: boolean
+    target?: boolean
+    current?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["budgetPlan"]>
 
   export type BudgetPlanSelectScalar = {
     id?: boolean
-    month?: boolean
-    year?: boolean
-    planned?: boolean
     userId?: boolean
-    categoryId?: boolean
+    name?: boolean
+    target?: boolean
+    current?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type BudgetPlanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "month" | "year" | "planned" | "userId" | "categoryId", ExtArgs["result"]["budgetPlan"]>
+  export type BudgetPlanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "name" | "target" | "current" | "createdAt" | "updatedAt", ExtArgs["result"]["budgetPlan"]>
   export type BudgetPlanInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    category?: boolean | CategoryDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type BudgetPlanIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    category?: boolean | CategoryDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type BudgetPlanIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    category?: boolean | CategoryDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $BudgetPlanPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "BudgetPlan"
     objects: {
-      category: Prisma.$CategoryPayload<ExtArgs>
       user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      month: number
-      year: number
-      planned: Prisma.Decimal
       userId: string
-      categoryId: string
+      name: string
+      target: Prisma.Decimal
+      current: Prisma.Decimal
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["budgetPlan"]>
     composites: {}
   }
@@ -5285,7 +5249,6 @@ export namespace Prisma {
    */
   export interface Prisma__BudgetPlanClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    category<T extends CategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CategoryDefaultArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -5317,11 +5280,12 @@ export namespace Prisma {
    */
   interface BudgetPlanFieldRefs {
     readonly id: FieldRef<"BudgetPlan", 'String'>
-    readonly month: FieldRef<"BudgetPlan", 'Int'>
-    readonly year: FieldRef<"BudgetPlan", 'Int'>
-    readonly planned: FieldRef<"BudgetPlan", 'Decimal'>
     readonly userId: FieldRef<"BudgetPlan", 'String'>
-    readonly categoryId: FieldRef<"BudgetPlan", 'String'>
+    readonly name: FieldRef<"BudgetPlan", 'String'>
+    readonly target: FieldRef<"BudgetPlan", 'Decimal'>
+    readonly current: FieldRef<"BudgetPlan", 'Decimal'>
+    readonly createdAt: FieldRef<"BudgetPlan", 'DateTime'>
+    readonly updatedAt: FieldRef<"BudgetPlan", 'DateTime'>
   }
     
 
@@ -5786,11 +5750,12 @@ export namespace Prisma {
 
   export const BudgetPlanScalarFieldEnum: {
     id: 'id',
-    month: 'month',
-    year: 'year',
-    planned: 'planned',
     userId: 'userId',
-    categoryId: 'categoryId'
+    name: 'name',
+    target: 'target',
+    current: 'current',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type BudgetPlanScalarFieldEnum = (typeof BudgetPlanScalarFieldEnum)[keyof typeof BudgetPlanScalarFieldEnum]
@@ -5893,20 +5858,6 @@ export namespace Prisma {
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
-
-
-  /**
-   * Reference to a field of type 'Float'
-   */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
-
-  /**
-   * Reference to a field of type 'Float[]'
-   */
-  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
-    
   /**
    * Deep Input Types
    */
@@ -5981,7 +5932,6 @@ export namespace Prisma {
     name?: StringFilter<"Category"> | string
     type?: EnumCategoryTypeFilter<"Category"> | $Enums.CategoryType
     userId?: StringFilter<"Category"> | string
-    budgetPlans?: BudgetPlanListRelationFilter
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     transactions?: TransactionListRelationFilter
   }
@@ -5991,7 +5941,6 @@ export namespace Prisma {
     name?: SortOrder
     type?: SortOrder
     userId?: SortOrder
-    budgetPlans?: BudgetPlanOrderByRelationAggregateInput
     user?: UserOrderByWithRelationInput
     transactions?: TransactionOrderByRelationAggregateInput
   }
@@ -6004,7 +5953,6 @@ export namespace Prisma {
     name?: StringFilter<"Category"> | string
     type?: EnumCategoryTypeFilter<"Category"> | $Enums.CategoryType
     userId?: StringFilter<"Category"> | string
-    budgetPlans?: BudgetPlanListRelationFilter
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     transactions?: TransactionListRelationFilter
   }, "id">
@@ -6104,23 +6052,23 @@ export namespace Prisma {
     OR?: BudgetPlanWhereInput[]
     NOT?: BudgetPlanWhereInput | BudgetPlanWhereInput[]
     id?: StringFilter<"BudgetPlan"> | string
-    month?: IntFilter<"BudgetPlan"> | number
-    year?: IntFilter<"BudgetPlan"> | number
-    planned?: DecimalFilter<"BudgetPlan"> | Decimal | DecimalJsLike | number | string
     userId?: StringFilter<"BudgetPlan"> | string
-    categoryId?: StringFilter<"BudgetPlan"> | string
-    category?: XOR<CategoryScalarRelationFilter, CategoryWhereInput>
+    name?: StringFilter<"BudgetPlan"> | string
+    target?: DecimalFilter<"BudgetPlan"> | Decimal | DecimalJsLike | number | string
+    current?: DecimalFilter<"BudgetPlan"> | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFilter<"BudgetPlan"> | Date | string
+    updatedAt?: DateTimeFilter<"BudgetPlan"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type BudgetPlanOrderByWithRelationInput = {
     id?: SortOrder
-    month?: SortOrder
-    year?: SortOrder
-    planned?: SortOrder
     userId?: SortOrder
-    categoryId?: SortOrder
-    category?: CategoryOrderByWithRelationInput
+    name?: SortOrder
+    target?: SortOrder
+    current?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
   }
 
@@ -6129,22 +6077,23 @@ export namespace Prisma {
     AND?: BudgetPlanWhereInput | BudgetPlanWhereInput[]
     OR?: BudgetPlanWhereInput[]
     NOT?: BudgetPlanWhereInput | BudgetPlanWhereInput[]
-    month?: IntFilter<"BudgetPlan"> | number
-    year?: IntFilter<"BudgetPlan"> | number
-    planned?: DecimalFilter<"BudgetPlan"> | Decimal | DecimalJsLike | number | string
     userId?: StringFilter<"BudgetPlan"> | string
-    categoryId?: StringFilter<"BudgetPlan"> | string
-    category?: XOR<CategoryScalarRelationFilter, CategoryWhereInput>
+    name?: StringFilter<"BudgetPlan"> | string
+    target?: DecimalFilter<"BudgetPlan"> | Decimal | DecimalJsLike | number | string
+    current?: DecimalFilter<"BudgetPlan"> | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFilter<"BudgetPlan"> | Date | string
+    updatedAt?: DateTimeFilter<"BudgetPlan"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
   export type BudgetPlanOrderByWithAggregationInput = {
     id?: SortOrder
-    month?: SortOrder
-    year?: SortOrder
-    planned?: SortOrder
     userId?: SortOrder
-    categoryId?: SortOrder
+    name?: SortOrder
+    target?: SortOrder
+    current?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: BudgetPlanCountOrderByAggregateInput
     _avg?: BudgetPlanAvgOrderByAggregateInput
     _max?: BudgetPlanMaxOrderByAggregateInput
@@ -6157,11 +6106,12 @@ export namespace Prisma {
     OR?: BudgetPlanScalarWhereWithAggregatesInput[]
     NOT?: BudgetPlanScalarWhereWithAggregatesInput | BudgetPlanScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"BudgetPlan"> | string
-    month?: IntWithAggregatesFilter<"BudgetPlan"> | number
-    year?: IntWithAggregatesFilter<"BudgetPlan"> | number
-    planned?: DecimalWithAggregatesFilter<"BudgetPlan"> | Decimal | DecimalJsLike | number | string
     userId?: StringWithAggregatesFilter<"BudgetPlan"> | string
-    categoryId?: StringWithAggregatesFilter<"BudgetPlan"> | string
+    name?: StringWithAggregatesFilter<"BudgetPlan"> | string
+    target?: DecimalWithAggregatesFilter<"BudgetPlan"> | Decimal | DecimalJsLike | number | string
+    current?: DecimalWithAggregatesFilter<"BudgetPlan"> | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeWithAggregatesFilter<"BudgetPlan"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"BudgetPlan"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -6236,7 +6186,6 @@ export namespace Prisma {
     id?: string
     name: string
     type: $Enums.CategoryType
-    budgetPlans?: BudgetPlanCreateNestedManyWithoutCategoryInput
     user: UserCreateNestedOneWithoutCategoriesInput
     transactions?: TransactionCreateNestedManyWithoutCategoryInput
   }
@@ -6246,7 +6195,6 @@ export namespace Prisma {
     name: string
     type: $Enums.CategoryType
     userId: string
-    budgetPlans?: BudgetPlanUncheckedCreateNestedManyWithoutCategoryInput
     transactions?: TransactionUncheckedCreateNestedManyWithoutCategoryInput
   }
 
@@ -6254,7 +6202,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     type?: EnumCategoryTypeFieldUpdateOperationsInput | $Enums.CategoryType
-    budgetPlans?: BudgetPlanUpdateManyWithoutCategoryNestedInput
     user?: UserUpdateOneRequiredWithoutCategoriesNestedInput
     transactions?: TransactionUpdateManyWithoutCategoryNestedInput
   }
@@ -6264,7 +6211,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     type?: EnumCategoryTypeFieldUpdateOperationsInput | $Enums.CategoryType
     userId?: StringFieldUpdateOperationsInput | string
-    budgetPlans?: BudgetPlanUncheckedUpdateManyWithoutCategoryNestedInput
     transactions?: TransactionUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
@@ -6358,63 +6304,71 @@ export namespace Prisma {
 
   export type BudgetPlanCreateInput = {
     id?: string
-    month: number
-    year: number
-    planned: Decimal | DecimalJsLike | number | string
-    category: CategoryCreateNestedOneWithoutBudgetPlansInput
+    name: string
+    target: Decimal | DecimalJsLike | number | string
+    current?: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutBudgetPlansInput
   }
 
   export type BudgetPlanUncheckedCreateInput = {
     id?: string
-    month: number
-    year: number
-    planned: Decimal | DecimalJsLike | number | string
     userId: string
-    categoryId: string
+    name: string
+    target: Decimal | DecimalJsLike | number | string
+    current?: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type BudgetPlanUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    month?: IntFieldUpdateOperationsInput | number
-    year?: IntFieldUpdateOperationsInput | number
-    planned?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    category?: CategoryUpdateOneRequiredWithoutBudgetPlansNestedInput
+    name?: StringFieldUpdateOperationsInput | string
+    target?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    current?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutBudgetPlansNestedInput
   }
 
   export type BudgetPlanUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    month?: IntFieldUpdateOperationsInput | number
-    year?: IntFieldUpdateOperationsInput | number
-    planned?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     userId?: StringFieldUpdateOperationsInput | string
-    categoryId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    target?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    current?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BudgetPlanCreateManyInput = {
     id?: string
-    month: number
-    year: number
-    planned: Decimal | DecimalJsLike | number | string
     userId: string
-    categoryId: string
+    name: string
+    target: Decimal | DecimalJsLike | number | string
+    current?: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type BudgetPlanUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    month?: IntFieldUpdateOperationsInput | number
-    year?: IntFieldUpdateOperationsInput | number
-    planned?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    name?: StringFieldUpdateOperationsInput | string
+    target?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    current?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BudgetPlanUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    month?: IntFieldUpdateOperationsInput | number
-    year?: IntFieldUpdateOperationsInput | number
-    planned?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     userId?: StringFieldUpdateOperationsInput | string
-    categoryId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    target?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    current?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -6680,70 +6634,44 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
   export type BudgetPlanCountOrderByAggregateInput = {
     id?: SortOrder
-    month?: SortOrder
-    year?: SortOrder
-    planned?: SortOrder
     userId?: SortOrder
-    categoryId?: SortOrder
+    name?: SortOrder
+    target?: SortOrder
+    current?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type BudgetPlanAvgOrderByAggregateInput = {
-    month?: SortOrder
-    year?: SortOrder
-    planned?: SortOrder
+    target?: SortOrder
+    current?: SortOrder
   }
 
   export type BudgetPlanMaxOrderByAggregateInput = {
     id?: SortOrder
-    month?: SortOrder
-    year?: SortOrder
-    planned?: SortOrder
     userId?: SortOrder
-    categoryId?: SortOrder
+    name?: SortOrder
+    target?: SortOrder
+    current?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type BudgetPlanMinOrderByAggregateInput = {
     id?: SortOrder
-    month?: SortOrder
-    year?: SortOrder
-    planned?: SortOrder
     userId?: SortOrder
-    categoryId?: SortOrder
+    name?: SortOrder
+    target?: SortOrder
+    current?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type BudgetPlanSumOrderByAggregateInput = {
-    month?: SortOrder
-    year?: SortOrder
-    planned?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
+    target?: SortOrder
+    current?: SortOrder
   }
 
   export type BudgetPlanCreateNestedManyWithoutUserInput = {
@@ -6880,13 +6808,6 @@ export namespace Prisma {
     deleteMany?: TransactionScalarWhereInput | TransactionScalarWhereInput[]
   }
 
-  export type BudgetPlanCreateNestedManyWithoutCategoryInput = {
-    create?: XOR<BudgetPlanCreateWithoutCategoryInput, BudgetPlanUncheckedCreateWithoutCategoryInput> | BudgetPlanCreateWithoutCategoryInput[] | BudgetPlanUncheckedCreateWithoutCategoryInput[]
-    connectOrCreate?: BudgetPlanCreateOrConnectWithoutCategoryInput | BudgetPlanCreateOrConnectWithoutCategoryInput[]
-    createMany?: BudgetPlanCreateManyCategoryInputEnvelope
-    connect?: BudgetPlanWhereUniqueInput | BudgetPlanWhereUniqueInput[]
-  }
-
   export type UserCreateNestedOneWithoutCategoriesInput = {
     create?: XOR<UserCreateWithoutCategoriesInput, UserUncheckedCreateWithoutCategoriesInput>
     connectOrCreate?: UserCreateOrConnectWithoutCategoriesInput
@@ -6900,13 +6821,6 @@ export namespace Prisma {
     connect?: TransactionWhereUniqueInput | TransactionWhereUniqueInput[]
   }
 
-  export type BudgetPlanUncheckedCreateNestedManyWithoutCategoryInput = {
-    create?: XOR<BudgetPlanCreateWithoutCategoryInput, BudgetPlanUncheckedCreateWithoutCategoryInput> | BudgetPlanCreateWithoutCategoryInput[] | BudgetPlanUncheckedCreateWithoutCategoryInput[]
-    connectOrCreate?: BudgetPlanCreateOrConnectWithoutCategoryInput | BudgetPlanCreateOrConnectWithoutCategoryInput[]
-    createMany?: BudgetPlanCreateManyCategoryInputEnvelope
-    connect?: BudgetPlanWhereUniqueInput | BudgetPlanWhereUniqueInput[]
-  }
-
   export type TransactionUncheckedCreateNestedManyWithoutCategoryInput = {
     create?: XOR<TransactionCreateWithoutCategoryInput, TransactionUncheckedCreateWithoutCategoryInput> | TransactionCreateWithoutCategoryInput[] | TransactionUncheckedCreateWithoutCategoryInput[]
     connectOrCreate?: TransactionCreateOrConnectWithoutCategoryInput | TransactionCreateOrConnectWithoutCategoryInput[]
@@ -6916,20 +6830,6 @@ export namespace Prisma {
 
   export type EnumCategoryTypeFieldUpdateOperationsInput = {
     set?: $Enums.CategoryType
-  }
-
-  export type BudgetPlanUpdateManyWithoutCategoryNestedInput = {
-    create?: XOR<BudgetPlanCreateWithoutCategoryInput, BudgetPlanUncheckedCreateWithoutCategoryInput> | BudgetPlanCreateWithoutCategoryInput[] | BudgetPlanUncheckedCreateWithoutCategoryInput[]
-    connectOrCreate?: BudgetPlanCreateOrConnectWithoutCategoryInput | BudgetPlanCreateOrConnectWithoutCategoryInput[]
-    upsert?: BudgetPlanUpsertWithWhereUniqueWithoutCategoryInput | BudgetPlanUpsertWithWhereUniqueWithoutCategoryInput[]
-    createMany?: BudgetPlanCreateManyCategoryInputEnvelope
-    set?: BudgetPlanWhereUniqueInput | BudgetPlanWhereUniqueInput[]
-    disconnect?: BudgetPlanWhereUniqueInput | BudgetPlanWhereUniqueInput[]
-    delete?: BudgetPlanWhereUniqueInput | BudgetPlanWhereUniqueInput[]
-    connect?: BudgetPlanWhereUniqueInput | BudgetPlanWhereUniqueInput[]
-    update?: BudgetPlanUpdateWithWhereUniqueWithoutCategoryInput | BudgetPlanUpdateWithWhereUniqueWithoutCategoryInput[]
-    updateMany?: BudgetPlanUpdateManyWithWhereWithoutCategoryInput | BudgetPlanUpdateManyWithWhereWithoutCategoryInput[]
-    deleteMany?: BudgetPlanScalarWhereInput | BudgetPlanScalarWhereInput[]
   }
 
   export type UserUpdateOneRequiredWithoutCategoriesNestedInput = {
@@ -6952,20 +6852,6 @@ export namespace Prisma {
     update?: TransactionUpdateWithWhereUniqueWithoutCategoryInput | TransactionUpdateWithWhereUniqueWithoutCategoryInput[]
     updateMany?: TransactionUpdateManyWithWhereWithoutCategoryInput | TransactionUpdateManyWithWhereWithoutCategoryInput[]
     deleteMany?: TransactionScalarWhereInput | TransactionScalarWhereInput[]
-  }
-
-  export type BudgetPlanUncheckedUpdateManyWithoutCategoryNestedInput = {
-    create?: XOR<BudgetPlanCreateWithoutCategoryInput, BudgetPlanUncheckedCreateWithoutCategoryInput> | BudgetPlanCreateWithoutCategoryInput[] | BudgetPlanUncheckedCreateWithoutCategoryInput[]
-    connectOrCreate?: BudgetPlanCreateOrConnectWithoutCategoryInput | BudgetPlanCreateOrConnectWithoutCategoryInput[]
-    upsert?: BudgetPlanUpsertWithWhereUniqueWithoutCategoryInput | BudgetPlanUpsertWithWhereUniqueWithoutCategoryInput[]
-    createMany?: BudgetPlanCreateManyCategoryInputEnvelope
-    set?: BudgetPlanWhereUniqueInput | BudgetPlanWhereUniqueInput[]
-    disconnect?: BudgetPlanWhereUniqueInput | BudgetPlanWhereUniqueInput[]
-    delete?: BudgetPlanWhereUniqueInput | BudgetPlanWhereUniqueInput[]
-    connect?: BudgetPlanWhereUniqueInput | BudgetPlanWhereUniqueInput[]
-    update?: BudgetPlanUpdateWithWhereUniqueWithoutCategoryInput | BudgetPlanUpdateWithWhereUniqueWithoutCategoryInput[]
-    updateMany?: BudgetPlanUpdateManyWithWhereWithoutCategoryInput | BudgetPlanUpdateManyWithWhereWithoutCategoryInput[]
-    deleteMany?: BudgetPlanScalarWhereInput | BudgetPlanScalarWhereInput[]
   }
 
   export type TransactionUncheckedUpdateManyWithoutCategoryNestedInput = {
@@ -7022,32 +6908,10 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutTransactionsInput, UserUpdateWithoutTransactionsInput>, UserUncheckedUpdateWithoutTransactionsInput>
   }
 
-  export type CategoryCreateNestedOneWithoutBudgetPlansInput = {
-    create?: XOR<CategoryCreateWithoutBudgetPlansInput, CategoryUncheckedCreateWithoutBudgetPlansInput>
-    connectOrCreate?: CategoryCreateOrConnectWithoutBudgetPlansInput
-    connect?: CategoryWhereUniqueInput
-  }
-
   export type UserCreateNestedOneWithoutBudgetPlansInput = {
     create?: XOR<UserCreateWithoutBudgetPlansInput, UserUncheckedCreateWithoutBudgetPlansInput>
     connectOrCreate?: UserCreateOrConnectWithoutBudgetPlansInput
     connect?: UserWhereUniqueInput
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type CategoryUpdateOneRequiredWithoutBudgetPlansNestedInput = {
-    create?: XOR<CategoryCreateWithoutBudgetPlansInput, CategoryUncheckedCreateWithoutBudgetPlansInput>
-    connectOrCreate?: CategoryCreateOrConnectWithoutBudgetPlansInput
-    upsert?: CategoryUpsertWithoutBudgetPlansInput
-    connect?: CategoryWhereUniqueInput
-    update?: XOR<XOR<CategoryUpdateToOneWithWhereWithoutBudgetPlansInput, CategoryUpdateWithoutBudgetPlansInput>, CategoryUncheckedUpdateWithoutBudgetPlansInput>
   }
 
   export type UserUpdateOneRequiredWithoutBudgetPlansNestedInput = {
@@ -7211,47 +7075,22 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
   export type BudgetPlanCreateWithoutUserInput = {
     id?: string
-    month: number
-    year: number
-    planned: Decimal | DecimalJsLike | number | string
-    category: CategoryCreateNestedOneWithoutBudgetPlansInput
+    name: string
+    target: Decimal | DecimalJsLike | number | string
+    current?: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type BudgetPlanUncheckedCreateWithoutUserInput = {
     id?: string
-    month: number
-    year: number
-    planned: Decimal | DecimalJsLike | number | string
-    categoryId: string
+    name: string
+    target: Decimal | DecimalJsLike | number | string
+    current?: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type BudgetPlanCreateOrConnectWithoutUserInput = {
@@ -7268,7 +7107,6 @@ export namespace Prisma {
     id?: string
     name: string
     type: $Enums.CategoryType
-    budgetPlans?: BudgetPlanCreateNestedManyWithoutCategoryInput
     transactions?: TransactionCreateNestedManyWithoutCategoryInput
   }
 
@@ -7276,7 +7114,6 @@ export namespace Prisma {
     id?: string
     name: string
     type: $Enums.CategoryType
-    budgetPlans?: BudgetPlanUncheckedCreateNestedManyWithoutCategoryInput
     transactions?: TransactionUncheckedCreateNestedManyWithoutCategoryInput
   }
 
@@ -7339,11 +7176,12 @@ export namespace Prisma {
     OR?: BudgetPlanScalarWhereInput[]
     NOT?: BudgetPlanScalarWhereInput | BudgetPlanScalarWhereInput[]
     id?: StringFilter<"BudgetPlan"> | string
-    month?: IntFilter<"BudgetPlan"> | number
-    year?: IntFilter<"BudgetPlan"> | number
-    planned?: DecimalFilter<"BudgetPlan"> | Decimal | DecimalJsLike | number | string
     userId?: StringFilter<"BudgetPlan"> | string
-    categoryId?: StringFilter<"BudgetPlan"> | string
+    name?: StringFilter<"BudgetPlan"> | string
+    target?: DecimalFilter<"BudgetPlan"> | Decimal | DecimalJsLike | number | string
+    current?: DecimalFilter<"BudgetPlan"> | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFilter<"BudgetPlan"> | Date | string
+    updatedAt?: DateTimeFilter<"BudgetPlan"> | Date | string
   }
 
   export type CategoryUpsertWithWhereUniqueWithoutUserInput = {
@@ -7401,32 +7239,6 @@ export namespace Prisma {
     categoryId?: StringFilter<"Transaction"> | string
   }
 
-  export type BudgetPlanCreateWithoutCategoryInput = {
-    id?: string
-    month: number
-    year: number
-    planned: Decimal | DecimalJsLike | number | string
-    user: UserCreateNestedOneWithoutBudgetPlansInput
-  }
-
-  export type BudgetPlanUncheckedCreateWithoutCategoryInput = {
-    id?: string
-    month: number
-    year: number
-    planned: Decimal | DecimalJsLike | number | string
-    userId: string
-  }
-
-  export type BudgetPlanCreateOrConnectWithoutCategoryInput = {
-    where: BudgetPlanWhereUniqueInput
-    create: XOR<BudgetPlanCreateWithoutCategoryInput, BudgetPlanUncheckedCreateWithoutCategoryInput>
-  }
-
-  export type BudgetPlanCreateManyCategoryInputEnvelope = {
-    data: BudgetPlanCreateManyCategoryInput | BudgetPlanCreateManyCategoryInput[]
-    skipDuplicates?: boolean
-  }
-
   export type UserCreateWithoutCategoriesInput = {
     id?: string
     email: string
@@ -7480,22 +7292,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type BudgetPlanUpsertWithWhereUniqueWithoutCategoryInput = {
-    where: BudgetPlanWhereUniqueInput
-    update: XOR<BudgetPlanUpdateWithoutCategoryInput, BudgetPlanUncheckedUpdateWithoutCategoryInput>
-    create: XOR<BudgetPlanCreateWithoutCategoryInput, BudgetPlanUncheckedCreateWithoutCategoryInput>
-  }
-
-  export type BudgetPlanUpdateWithWhereUniqueWithoutCategoryInput = {
-    where: BudgetPlanWhereUniqueInput
-    data: XOR<BudgetPlanUpdateWithoutCategoryInput, BudgetPlanUncheckedUpdateWithoutCategoryInput>
-  }
-
-  export type BudgetPlanUpdateManyWithWhereWithoutCategoryInput = {
-    where: BudgetPlanScalarWhereInput
-    data: XOR<BudgetPlanUpdateManyMutationInput, BudgetPlanUncheckedUpdateManyWithoutCategoryInput>
-  }
-
   export type UserUpsertWithoutCategoriesInput = {
     update: XOR<UserUpdateWithoutCategoriesInput, UserUncheckedUpdateWithoutCategoriesInput>
     create: XOR<UserCreateWithoutCategoriesInput, UserUncheckedCreateWithoutCategoriesInput>
@@ -7547,7 +7343,6 @@ export namespace Prisma {
     id?: string
     name: string
     type: $Enums.CategoryType
-    budgetPlans?: BudgetPlanCreateNestedManyWithoutCategoryInput
     user: UserCreateNestedOneWithoutCategoriesInput
   }
 
@@ -7556,7 +7351,6 @@ export namespace Prisma {
     name: string
     type: $Enums.CategoryType
     userId: string
-    budgetPlans?: BudgetPlanUncheckedCreateNestedManyWithoutCategoryInput
   }
 
   export type CategoryCreateOrConnectWithoutTransactionsInput = {
@@ -7604,7 +7398,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     type?: EnumCategoryTypeFieldUpdateOperationsInput | $Enums.CategoryType
-    budgetPlans?: BudgetPlanUpdateManyWithoutCategoryNestedInput
     user?: UserUpdateOneRequiredWithoutCategoriesNestedInput
   }
 
@@ -7613,7 +7406,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     type?: EnumCategoryTypeFieldUpdateOperationsInput | $Enums.CategoryType
     userId?: StringFieldUpdateOperationsInput | string
-    budgetPlans?: BudgetPlanUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type UserUpsertWithoutTransactionsInput = {
@@ -7647,27 +7439,6 @@ export namespace Prisma {
     categories?: CategoryUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type CategoryCreateWithoutBudgetPlansInput = {
-    id?: string
-    name: string
-    type: $Enums.CategoryType
-    user: UserCreateNestedOneWithoutCategoriesInput
-    transactions?: TransactionCreateNestedManyWithoutCategoryInput
-  }
-
-  export type CategoryUncheckedCreateWithoutBudgetPlansInput = {
-    id?: string
-    name: string
-    type: $Enums.CategoryType
-    userId: string
-    transactions?: TransactionUncheckedCreateNestedManyWithoutCategoryInput
-  }
-
-  export type CategoryCreateOrConnectWithoutBudgetPlansInput = {
-    where: CategoryWhereUniqueInput
-    create: XOR<CategoryCreateWithoutBudgetPlansInput, CategoryUncheckedCreateWithoutBudgetPlansInput>
-  }
-
   export type UserCreateWithoutBudgetPlansInput = {
     id?: string
     email: string
@@ -7691,33 +7462,6 @@ export namespace Prisma {
   export type UserCreateOrConnectWithoutBudgetPlansInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutBudgetPlansInput, UserUncheckedCreateWithoutBudgetPlansInput>
-  }
-
-  export type CategoryUpsertWithoutBudgetPlansInput = {
-    update: XOR<CategoryUpdateWithoutBudgetPlansInput, CategoryUncheckedUpdateWithoutBudgetPlansInput>
-    create: XOR<CategoryCreateWithoutBudgetPlansInput, CategoryUncheckedCreateWithoutBudgetPlansInput>
-    where?: CategoryWhereInput
-  }
-
-  export type CategoryUpdateToOneWithWhereWithoutBudgetPlansInput = {
-    where?: CategoryWhereInput
-    data: XOR<CategoryUpdateWithoutBudgetPlansInput, CategoryUncheckedUpdateWithoutBudgetPlansInput>
-  }
-
-  export type CategoryUpdateWithoutBudgetPlansInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    type?: EnumCategoryTypeFieldUpdateOperationsInput | $Enums.CategoryType
-    user?: UserUpdateOneRequiredWithoutCategoriesNestedInput
-    transactions?: TransactionUpdateManyWithoutCategoryNestedInput
-  }
-
-  export type CategoryUncheckedUpdateWithoutBudgetPlansInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    type?: EnumCategoryTypeFieldUpdateOperationsInput | $Enums.CategoryType
-    userId?: StringFieldUpdateOperationsInput | string
-    transactions?: TransactionUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type UserUpsertWithoutBudgetPlansInput = {
@@ -7753,10 +7497,11 @@ export namespace Prisma {
 
   export type BudgetPlanCreateManyUserInput = {
     id?: string
-    month: number
-    year: number
-    planned: Decimal | DecimalJsLike | number | string
-    categoryId: string
+    name: string
+    target: Decimal | DecimalJsLike | number | string
+    current?: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type CategoryCreateManyUserInput = {
@@ -7776,33 +7521,35 @@ export namespace Prisma {
 
   export type BudgetPlanUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    month?: IntFieldUpdateOperationsInput | number
-    year?: IntFieldUpdateOperationsInput | number
-    planned?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    category?: CategoryUpdateOneRequiredWithoutBudgetPlansNestedInput
+    name?: StringFieldUpdateOperationsInput | string
+    target?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    current?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BudgetPlanUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    month?: IntFieldUpdateOperationsInput | number
-    year?: IntFieldUpdateOperationsInput | number
-    planned?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    categoryId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    target?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    current?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BudgetPlanUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    month?: IntFieldUpdateOperationsInput | number
-    year?: IntFieldUpdateOperationsInput | number
-    planned?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    categoryId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    target?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    current?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CategoryUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     type?: EnumCategoryTypeFieldUpdateOperationsInput | $Enums.CategoryType
-    budgetPlans?: BudgetPlanUpdateManyWithoutCategoryNestedInput
     transactions?: TransactionUpdateManyWithoutCategoryNestedInput
   }
 
@@ -7810,7 +7557,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     type?: EnumCategoryTypeFieldUpdateOperationsInput | $Enums.CategoryType
-    budgetPlans?: BudgetPlanUncheckedUpdateManyWithoutCategoryNestedInput
     transactions?: TransactionUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
@@ -7847,14 +7593,6 @@ export namespace Prisma {
     categoryId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type BudgetPlanCreateManyCategoryInput = {
-    id?: string
-    month: number
-    year: number
-    planned: Decimal | DecimalJsLike | number | string
-    userId: string
-  }
-
   export type TransactionCreateManyCategoryInput = {
     id?: string
     amount: Decimal | DecimalJsLike | number | string
@@ -7862,30 +7600,6 @@ export namespace Prisma {
     date: Date | string
     createdAt?: Date | string
     userId: string
-  }
-
-  export type BudgetPlanUpdateWithoutCategoryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    month?: IntFieldUpdateOperationsInput | number
-    year?: IntFieldUpdateOperationsInput | number
-    planned?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    user?: UserUpdateOneRequiredWithoutBudgetPlansNestedInput
-  }
-
-  export type BudgetPlanUncheckedUpdateWithoutCategoryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    month?: IntFieldUpdateOperationsInput | number
-    year?: IntFieldUpdateOperationsInput | number
-    planned?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    userId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type BudgetPlanUncheckedUpdateManyWithoutCategoryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    month?: IntFieldUpdateOperationsInput | number
-    year?: IntFieldUpdateOperationsInput | number
-    planned?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type TransactionUpdateWithoutCategoryInput = {
